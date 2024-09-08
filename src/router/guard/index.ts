@@ -16,11 +16,11 @@ export default function createRouteGuard(router: Router) {
     }
 
     // 登录守卫
-    const loginPass = await setupLoginGuard(to, from, next)
-    if (loginPass) {
-      NProgress.done()
-      return
-    }
+    // const loginPass = await setupLoginGuard(to, from, next)
+    // if (loginPass) {
+    //   NProgress.done()
+    //   return
+    // }
 
     next()
     // setupPermissionGuard(to, from, next)

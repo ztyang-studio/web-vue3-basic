@@ -1,3 +1,4 @@
+@use "sass:map";
 // 全局主题变量配置 误删 ！！！
 $white-color: #fff;
 $black-color: #23252a;
@@ -46,8 +47,9 @@ $themes: (
 );
 
 @function getVal($key) {
-  $themeMap: map-get($themes, $curTheme);
-  @return map-get($themeMap, $key);
+  // $themeMap: map-get($themes, $curTheme);
+  $themeMap: map.get($themes, $curTheme);
+  @return map.get($themeMap, $key);
 }
 
 @mixin useTheme() {

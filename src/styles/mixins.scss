@@ -1,3 +1,4 @@
+@use "sass:color";
 @mixin bg-image {
     background-position: center;
     background-size: cover;
@@ -14,9 +15,9 @@
 }
 
 @mixin lighten-color($color, $percentage) {
-    background-color: lighten($color, $percentage);
+    background-color: color.adjust($color, $lightness: $percentage);
 }
 
 @mixin darken-color($color, $percentage) {
-    background-color: darken($color, $percentage);
+    background-color: color.adjust($color, $lightness: -$percentage);
 }

@@ -12,8 +12,6 @@ listenerAuthCode()
 </template>
 
 <style lang="scss">
-@import '@/styles/scrollbar.scss';
-
 @font-face {
   font-family: douyu;
   src:
@@ -31,7 +29,6 @@ listenerAuthCode()
     url(/static/fonts/iconfont.ttf) format('truetype');
   font-display: swap;
 }
-
 * {
   @include useTheme {
     @include scrollbar(5px, getVal(scrollColor));

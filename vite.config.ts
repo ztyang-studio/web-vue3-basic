@@ -41,7 +41,14 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use "~/styles/global.scss" as *;`
+          api: 'modern-compiler',
+          additionalData: `
+           @use "~/styles/main.scss" as *;
+           @use "~/styles/theme.scss" as *;
+           @use "~/styles/media.scss" as *;
+           @use "~/styles/mixins.scss" as *;
+           @use "~/styles/scrollbar.scss" as *;
+           `
         }
       }
     },

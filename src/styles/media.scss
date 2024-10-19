@@ -1,3 +1,6 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
 $breakpoints: (
     phone: (
         0px,
@@ -26,10 +29,10 @@ $breakpoints: (
 );
 
 @mixin respond-to($breakname) {
-    $bp: map-get($breakpoints, $breakname);
-    @if type-of($bp) == "list" {
-        $min: nth($bp, 1);
-        $max: nth($bp, 2);
+    $bp: map.get($breakpoints, $breakname);
+    @if meta.type-of($bp) == "list" {
+        $min: list.nth($bp, 1);
+        $max: list.nth($bp, 2);
         @media (min-width: $min) and (max-width: $max) {
             @content;
         }

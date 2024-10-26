@@ -21,9 +21,7 @@
 import { useRoute } from 'vue-router'
 import useResponsive from '@/hooks/responsive'
 
-const route = useRoute()
-
-useResponsive(true)
+useResponsive(false)
 
 const appStore = useAppStore()
 </script>

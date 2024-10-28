@@ -138,7 +138,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TableColumnData } from '@arco-design/web-vue'
+import type { TableColumnData, TableRowSelection } from '@arco-design/web-vue'
 
 const btnRef = ref()
 const tableRef = ref()
@@ -147,7 +147,7 @@ const { isFullscreen, toggle: toggleFullScreen } = useFullscreen(cardRef)
 
 const selected = defineModel<number[]>('selected', { default: [] })
 
-const rowSelection = reactive({
+const rowSelection = reactive<TableRowSelection>({
   type: 'checkbox',
   showCheckedAll: true
 })

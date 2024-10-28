@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import ADMIN_ROUTES from '@/router/routes/modules/admin'
+import { listenerRouteChange } from '@/utils/emitter/router'
 
 const route = useRoute()
 const router = useRouter()
@@ -35,16 +36,12 @@ const routeList = ADMIN_ROUTES[0].children || []
 const openKeys = ref<string[]>([String(route.matched[1]?.name)])
 const selectedKeys = ref<string[]>([String(route.name)])
 
-watch(
-  route,
-  (val) => {
-    selectedKeys.value = [val.name as string]
-    if (!openKeys.value.includes(val.matched[1]?.name as string)) {
-      openKeys.value.push(val.matched[1]?.name as string)
-    }
-  },
-  { immediate: true }
-)
+listenerRouteChange((val) => {
+  selectedKeys.value = [val.name as string]
+  if (!openKeys.value.includes(val.matched[1]?.name as string)) {
+    openKeys.value.push(val.matched[1]?.name as string)
+  }
+})
 
 const methods = {
   handleClick: (e: string) => {
@@ -55,11 +52,38 @@ const methods = {
 
 <style lang="scss">
 .admin-side-wrap {
+  .arco-menu-inline-content {
+    position: relative;
+    &::before {
+      position: absolute;
+      content: '';
+      left: 5px;
+      top: 0;
+      bottom: 22px;
+      width: 1px;
+      background-color: var(--border-color);
+    }
+
+    .arco-menu-indent {
+      position: relative;
+      &::before {
+        position: absolute;
+        content: '';
+        right: 5px;
+        top: -6px;
+        width: 10px;
+        height: 1px;
+        background-color: var(--border-color);
+      }
+    }
+  }
+
   .arco-menu-item {
     height: 35px;
     line-height: 35px;
     border-radius: 5px;
     padding: 0;
+    font-weight: 600;
 
     &.arco-menu-selected {
       color: #fff;
@@ -127,9 +151,16 @@ const methods = {
     height: 35px;
     padding-right: 12px;
     line-height: 35px;
+    font-weight: 600;
 
     @include useTheme {
       background-color: rgba(getVal(keyColor), 0.03) !important;
+    }
+  }
+
+  .arco-menu-inline-content {
+    .arco-menu-item-inner {
+      font-weight: 500 !important;
     }
   }
 }

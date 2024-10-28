@@ -53,21 +53,21 @@ const url = defineModel<string>('url')
 
 const methods = {
   // 文件上传
-  handleUpload: async (option: RequestOption) => {
+  // 文件上传
+  handleUpload: (option: RequestOption) => {
     uploading.value = true
     const { onProgress, onError, onSuccess, fileItem } = option
-    const { code, data, msg } = await useFileApi.upload(
-      fileItem.file!!,
-      props.path,
-      props.fileName,
-      methods.handleProgress
-    )
-    uploading.value = false
-    if (code === 200) {
-      url.value = data.path
-    }
-    code === 200 ? onSuccess() : onError()
-    ResMsg(code, msg)
+    useFileApi
+      .upload(fileItem.file!!, props.path, props.fileName, methods.handleProgress)
+      .then(({ code, data, msg }) => {
+        uploading.value = false
+        if (code === 200) {
+          url.value = data.path
+        }
+        code === 200 ? onSuccess() : onError()
+        ResMsg(code, msg)
+      })
+
     return {
       abort() {}
     }

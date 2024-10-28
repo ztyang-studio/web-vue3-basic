@@ -10,7 +10,6 @@ class UserApi {
   login(params: any) {
     return request.post<Type.UserLogin>('/api/admin/base/user/login', params, false)
   }
-
 }
 
 export const useUserApi = new (Helper.comm.singleton(UserApi))()

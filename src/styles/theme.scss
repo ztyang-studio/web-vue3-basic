@@ -64,10 +64,11 @@ $themes: (
   }
 }
 
-* {
+body {
   @include useTheme {
     --text-color: #{getVal(textColor)};
     --color-bg-2: #{getVal(pureColor)};
+    --border-color: #{getVal(borderColor)};
     --color-spin-layer-bg: #{rgba(getVal(iniColor), 0.4)};
 
     .title-color {

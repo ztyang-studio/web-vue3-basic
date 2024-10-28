@@ -5,26 +5,13 @@ import setupLoginGuard from './login'
 // import setupPermissionGuard from './permission'
 
 export default function createRouteGuard(router: Router) {
-  router.beforeEach(async (to, from, next) => {
-    NProgress.start()
+  NProgress.start()
+  // 页面守卫
+  setupPageGuard(router)
 
-    // 页面守卫
-    const pagePass = await setupPageGuard(to, from, next)
-    if (pagePass) {
-      NProgress.done()
-      return
-    }
+  // 登录守卫
+  setupLoginGuard(router)
 
-    // 登录守卫
-    // const loginPass = await setupLoginGuard(to, from, next)
-    // if (loginPass) {
-    //   NProgress.done()
-    //   return
-    // }
-
-    next()
-    // setupPermissionGuard(to, from, next)
-
-    NProgress.done()
-  })
+  // setupPermissionGuard(to, from, next)
+  NProgress.done()
 }

@@ -4,38 +4,36 @@ import type {
   RouteLocationNormalizedLoadedGeneric,
   NavigationGuardNext
 } from 'vue-router'
+import type { Router } from 'vue-router'
 
 const jumpLogin = (
   to: RouteLocationNormalizedGeneric,
   from: RouteLocationNormalizedLoadedGeneric,
   next: NavigationGuardNext
 ) => {
-  next({
-    name: 'login',
-    query: {
-      redirect: encodeURIComponent(to.fullPath),
-      ...to.query
-    } as LocationQueryRaw
-  })
+  if (to.meta.needLogin) {
+    next({
+      name: 'login',
+      query: {
+        redirect: encodeURIComponent(to.fullPath),
+        ...to.query
+      } as LocationQueryRaw
+    })
+  } else next()
 }
 
-export default async function setupUserLoginInfoGuard(
-  to: RouteLocationNormalizedGeneric,
-  from: RouteLocationNormalizedLoadedGeneric,
-  next: NavigationGuardNext
-): Promise<boolean> {
-  const userStore = useUserStore()
+export default function setupUserLoginInfoGuard(router: Router) {
+  router.beforeEach((to, from, next) => {
+    const userStore = useUserStore()
 
-  if (userStore.hasLogin) {
-    if (to.name === 'login' || to.name === 'Login') {
-      next({ name: 'Home' })
-      return true
+    if (userStore.hasLogin) {
+      if (to.name === 'login' || to.name === 'Login') {
+        next({ name: 'Home' })
+      }
+      next()
+    } else {
+      if (to.name === 'login' || to.name === 'Login') next()
+      else jumpLogin(to, from, next)
     }
-
-    return false
-  } else {
-    if (to.name === 'login' || to.name === 'Login') next()
-    else jumpLogin(to, from, next)
-    return true
-  }
+  })
 }

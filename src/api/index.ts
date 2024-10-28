@@ -1,7 +1,9 @@
 import { useUserApi } from './modules/comm/user'
 import { useConfigApi } from './modules/comm/config'
+import { useInstallApi } from './modules/dev/install'
+import { useFileApi } from './modules/comm/file'
 
-export { useUserApi, useConfigApi }
+export { useUserApi, useFileApi, useConfigApi, useInstallApi }
 
 // const apiModules = import.meta.glob('./modules/**/**.ts', { eager: true })
 // const exportsToReExport = {}

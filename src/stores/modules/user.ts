@@ -36,7 +36,7 @@ export const useUserStore = defineStore('userStore', {
   persist: [
     {
       key: 'LOGIN-USER',
-      paths: ['user', 'token'],
+      pick: ['user', 'token'],
       storage: localStorage
     }
   ]

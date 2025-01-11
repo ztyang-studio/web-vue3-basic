@@ -1,11 +1,6 @@
 <template>
-  <a-tabs
-    class="header-tabs-wrap"
-    editable
-    :active-key="activeKey"
-    @tab-click="methods.clickTab"
-    @delete="methods.removeTab"
-  >
+  <a-tabs class="header-tabs-wrap" editable :active-key="activeKey" @tab-click="methods.clickTab"
+    @delete="methods.removeTab">
     <a-tab-pane v-for="(item, index) in tabRoute" :closable="!item.meta.fixed" :key="index">
       <template #title>
         <div class="flex-yc g-5">
@@ -18,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import ADMIN_ROUTES from '@/router/routes/modules/admin'
-import type { RouteRecordRaw, RouteRecordNameGeneric } from 'vue-router'
-import { listenerRouteChange } from '@/utils/emitter/router'
+import ADMIN_ROUTES from '@/router/routes/modules/app'
+import type { RouteRecordNameGeneric } from 'vue-router'
+import { RouterEmitter } from '@/emitter';
 
 interface TabRoute {
   name?: RouteRecordNameGeneric
@@ -32,7 +27,7 @@ const route = useRoute()
 const router = useRouter()
 const tabRoute = ref<TabRoute[]>([])
 const curentRoute = ref()
-const routeList = Helper.array.flat(ADMIN_ROUTES[0].children || [])
+const routeList = (ADMIN_ROUTES[0].children || []).flat()
 
 const activeKey = computed(() => {
   return tabRoute.value.findIndex((item) => item.name === curentRoute.value)
@@ -40,8 +35,8 @@ const activeKey = computed(() => {
 
 const methods = {
   initTabs: () => {
-    curentRoute.value = route.name
-    ;[...routeList].reverse().forEach((route) => {
+    curentRoute.value = route.name;
+    [...routeList].reverse().forEach((route) => {
       if (route.meta?.fixed) {
         tabRoute.value.unshift({
           name: route.name,
@@ -49,6 +44,12 @@ const methods = {
         })
       }
     })
+    if (!tabRoute.value.find((item) => item.name === route.name)) {
+      tabRoute.value.push({
+        name: route.name,
+        meta: route.meta
+      })
+    }
   },
   removeTab: (index: number | string) => {
     const delName = tabRoute.value[Number(index)].name
@@ -63,19 +64,22 @@ const methods = {
   }
 }
 
-listenerRouteChange((newRoute) => {
-  const hasRoute = tabRoute.value.find((item) => item.name === newRoute.name)
-  if (!hasRoute && !newRoute.meta.fixed) {
-    tabRoute.value.push({ ...newRoute })
+RouterEmitter.on('ROUTE:CHANGE', (val: any) => {
+  const hasRoute = tabRoute.value.find((item) => item.name === val.name)
+  if (!hasRoute && !val.meta.fixed) {
+    tabRoute.value.push({ ...val })
   }
-  curentRoute.value = newRoute.name
+  curentRoute.value = val.name
 })
+
+
 
 methods.initTabs()
 </script>
 
 <style lang="scss">
 .header-tabs-wrap {
+
   .arco-tabs-tab {
     height: 35px;
     margin: 0 15px;
@@ -92,6 +96,7 @@ methods.initTabs()
 
     &:hover {
       color: var(--theme-color);
+
       .arco-tabs-tab-close-btn {
         display: block;
       }
@@ -106,6 +111,12 @@ methods.initTabs()
 
   .arco-tabs-nav-ink {
     display: none;
+  }
+
+  .arco-tabs-nav {
+    &::before {
+      display: none;
+    }
   }
 }
 </style>

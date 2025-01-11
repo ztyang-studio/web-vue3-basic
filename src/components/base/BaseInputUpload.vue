@@ -57,16 +57,16 @@ const methods = {
   handleUpload: (option: RequestOption) => {
     uploading.value = true
     const { onProgress, onError, onSuccess, fileItem } = option
-    useFileApi
-      .upload(fileItem.file!!, props.path, props.fileName, methods.handleProgress)
-      .then(({ code, data, msg }) => {
-        uploading.value = false
-        if (code === 200) {
-          url.value = data.path
-        }
-        code === 200 ? onSuccess() : onError()
-        ResMsg(code, msg)
-      })
+    // useFileApi
+    //   .upload(fileItem.file!! as, props.path, props.fileName, methods.handleProgress)
+    //   .then(({ code, data, msg }) => {
+    //     uploading.value = false
+    //     if (code === 200) {
+    //       url.value = data.path
+    //     }
+    //     code === 200 ? onSuccess() : onError()
+    //     ResMsg(code, msg)
+    //   })
 
     return {
       abort() {}

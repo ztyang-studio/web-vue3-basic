@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { listenerAuthCode } from '@/utils/emitter/auth'
+import { useEventEmitter } from '@/hooks/events'
 
 const systemStore = useSystemStore()
 systemStore.init()
 
-listenerAuthCode()
+useEventEmitter()
 </script>
 
 <template>
-  <router-view v-if="systemStore.pass" />
+  <router-view />
 </template>
 
 <style lang="scss">

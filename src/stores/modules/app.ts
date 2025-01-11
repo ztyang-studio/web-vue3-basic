@@ -7,6 +7,10 @@ interface ENV {
   APP_ROUTE_MODE: string
   APP_VERSION: string
   APP_OUT_DIR: string
+  DEV: boolean
+  PROD: boolean
+  MODE: 'development' | 'production'
+  SSR: boolean
   [key: string]: any
 }
 interface AppState {

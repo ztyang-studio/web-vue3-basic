@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 // 全局主题变量配置 误删 ！！！
 $white-color: #fff;
 $black-color: #23252a;
@@ -21,7 +21,7 @@ $curTheme: light;
 
 $themes: (
   light: (
-    bgColor: #f2f3f5,
+    bgColor: #fefefe,
     cardBg: #ffffff,
     textColor: #4e5358,
     pureColor: $white-color,
@@ -33,7 +33,7 @@ $themes: (
     scrollColor: #dddee0
   ),
   dark: (
-    bgColor: #18181c,
+    bgColor: #1f2024,
     cardBg: #232324,
     textColor: #c0c3c6,
     pureColor: $black-color,
@@ -70,6 +70,8 @@ body {
     --color-bg-2: #{getVal(pureColor)};
     --border-color: #{getVal(borderColor)};
     --color-spin-layer-bg: #{rgba(getVal(iniColor), 0.4)};
+
+    color: var(--text-color);
 
     .title-color {
       color: getVal(titleColor);

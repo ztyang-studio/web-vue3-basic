@@ -41,7 +41,7 @@ html {
   }
 }
 
-@for $i from 0 through 10 {
+@for $i from 0 through 20 {
   .g-#{$i * 5} {
     gap: #{$i * 5}px;
   }
@@ -250,6 +250,10 @@ html {
   position: relative;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .trf {
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
@@ -260,67 +264,67 @@ html {
 
 .layout-169:after {
   padding-top: 56.25%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-43:after {
   padding-top: 75%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-21:after {
   padding-top: 50%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-12:after {
   padding-top: 200%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-150:after {
   padding-top: 150%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-120:after {
   padding-top: 120%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-52:after {
   padding-top: 35%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-51:after {
   padding-top: 20%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-31:after {
   padding-top: 33%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-41:after {
   padding-top: 25%;
-  content: "";
+  content: '';
   display: block;
 }
 
 .layout-100:after {
   padding-top: 100%;
-  content: "";
+  content: '';
   display: block;
 }
 
@@ -406,7 +410,7 @@ html {
 }
 
 .search-light:before {
-  content: "";
+  content: '';
   position: absolute;
   width: 1000px;
   height: 15px;

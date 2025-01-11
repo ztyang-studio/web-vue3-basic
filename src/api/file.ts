@@ -1,16 +1,17 @@
 import type { AxiosProgressEvent } from 'axios'
+import { AxiosRequest } from '@/utils/request/axios'
 
 /**
  * 文件API
  */
-class FileApi {
+class FileApi extends AxiosRequest {
   /**
    * 简单上传
    * @param file 文件对象
    * @param path 文件路径
    * @param name 文件名字
    */
-  upload(
+  uploadFile(
     file: File,
     path?: string,
     name?: string,
@@ -20,8 +21,8 @@ class FileApi {
     formData.append('file', file)
     path && formData.append('path', path)
     name && formData.append('name', name)
-    return request.upload<Type.Upload>('/api/admin/base/file/upload', formData, true, handleUpload)
+    return this.upload('/api/admin/base/file/upload', formData, true, handleUpload)
   }
 }
 
-export const useFileApi = new (Helper.comm.singleton(FileApi))()
+export const useFileApi = new FileApi()

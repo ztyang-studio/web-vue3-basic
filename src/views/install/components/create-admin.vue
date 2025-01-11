@@ -1,17 +1,11 @@
 <template>
-  <a-form
-    class="create-admin-step"
-    ref="formRef"
-    :model="formModel"
-    :rules="rules"
-    layout="vertical"
-    autocomplete="off"
-  >
+  <a-form class="create-admin-step" ref="formRef" :model="formModel" :rules="rules" layout="vertical"
+    autocomplete="off">
     <a-space direction="vertical">
-      <a-form-item field="account" hide-label validate-trigger="blur">
+      <!-- <a-form-item field="account" hide-label validate-trigger="blur">
         <template #extra> 管理员账号 </template>
-        <a-input v-model="formModel.account" placeholder="请输入账号" allow-clear> </a-input>
-      </a-form-item>
+<a-input v-model="formModel.account" placeholder="请输入账号" allow-clear> </a-input>
+</a-form-item> -->
       <a-form-item field="nickname" hide-label validate-trigger="blur">
         <template #extra> 管理员昵称 </template>
         <a-input v-model="formModel.nickname" placeholder="请输入昵称" allow-clear> </a-input>
@@ -22,22 +16,12 @@
       </a-form-item>
       <a-form-item field="password" hide-label validate-trigger="blur">
         <template #extra> 管理员密码 </template>
-        <a-input-password
-          autocomplete="false"
-          v-model="formModel.password"
-          placeholder="请输入密码"
-          allow-clear
-        >
+        <a-input-password autocomplete="false" v-model="formModel.password" placeholder="请输入密码" allow-clear>
         </a-input-password>
       </a-form-item>
       <a-form-item field="re_password" hide-label validate-trigger="blur">
         <template #extra> 确认管理员密码 </template>
-        <a-input-password
-          autocomplete="false"
-          v-model="formModel.re_password"
-          placeholder="请确认密码"
-          allow-clear
-        >
+        <a-input-password autocomplete="false" v-model="formModel.re_password" placeholder="请确认密码" allow-clear>
         </a-input-password>
       </a-form-item>
     </a-space>
@@ -56,7 +40,7 @@ const formModel = reactive({
 
 const emits = defineEmits(['next'])
 
-const rules = {
+const rules: Record<any, any> = {
   account: [
     {
       required: true,
@@ -73,6 +57,10 @@ const rules = {
     {
       required: true,
       message: '请输入管理员邮箱'
+    },
+    {
+      type: 'email',
+      message: '邮箱格式不正确'
     }
   ],
   password: [
@@ -106,8 +94,7 @@ const methods = {
   handleSubmit: async () => {
     const valid = await formRef.value?.validate()
     if (!valid) {
-      const { code, msg } = await useInstallApi.admin(formModel)
-
+      const { code, msg } = await useInstallApi.createAdmin(formModel)
       if (code === 200) {
         emits('next')
         ResMsg(code, msg)

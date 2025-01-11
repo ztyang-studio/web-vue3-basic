@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
       AutoImport({
         imports: ['vue', 'vue-router', 'pinia', '@vueuse/core'],
         dts: 'unplugin/auto-imports.d.ts',
-        dirs: ['src/api', 'src/hooks', 'src/utils', 'src/stores', 'src/constant'],
+        dirs: ['src/api', 'src/hooks', 'src/utils', 'src/enum', 'src/stores', 'src/typings'],
         resolvers: []
       }),
       Components({
@@ -49,6 +49,15 @@ export default defineConfig(({ mode }) => {
            @use "~/styles/mixins.scss" as *;
            @use "~/styles/scrollbar.scss" as *;
            `
+        }
+      }
+    },
+
+    worker: {
+      rollupOptions: {
+        output: {
+          entryFileNames: 'worker/[name]-[hash].js',
+          chunkFileNames: 'worker/[name]-[hash].js'
         }
       }
     },

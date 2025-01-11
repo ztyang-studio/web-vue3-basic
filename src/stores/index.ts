@@ -1,9 +1,9 @@
 import { createPinia } from 'pinia'
-import { useSystemStore } from './modules/system'
-import { useUserStore } from './modules/user'
-import { useAppStore } from './modules/app'
+
+export { useSystemStore } from './modules/system'
+export { useUserStore } from './modules/user'
+export { useAppStore } from './modules/app'
+export { useFileUploadStore } from './modules/file-upload'
 
 const pinia = createPinia()
-
-export { useSystemStore, useUserStore, useAppStore }
 export default pinia

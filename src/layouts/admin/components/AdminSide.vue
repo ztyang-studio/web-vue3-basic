@@ -9,39 +9,33 @@
       </div>
     </div>
 
-    <a-menu
-      class="mt-5"
-      :collapsed="appStore.isMobile"
-      :popup-max-height="false"
-      auto-scroll-into-view
-      v-model:open-keys="openKeys"
-      v-model:selected-keys="selectedKeys"
-      auto-open-selected
-      @menu-item-click="methods.handleClick"
-    >
+    <a-menu class="mt-5" :collapsed="appStore.isMobile" :popup-max-height="false" auto-scroll-into-view
+      v-model:open-keys="openKeys" v-model:selected-keys="selectedKeys" auto-open-selected
+      @menu-item-click="methods.handleClick">
       <RouteItem :route-list="routeList" />
     </a-menu>
   </div>
 </template>
 
 <script setup lang="ts">
-import ADMIN_ROUTES from '@/router/routes/modules/admin'
-import { listenerRouteChange } from '@/utils/emitter/router'
+import ADMIN_ROUTES from '@/router/routes/modules/app'
+import { RouterEmitter } from '@/emitter/router';
 
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const systemStore = useSystemStore()
 const routeList = ADMIN_ROUTES[0].children || []
-const openKeys = ref<string[]>([String(route.matched[1]?.name)])
+const openKeys = ref<string[]>([String(route.matched[1]?.name), 'file'])
 const selectedKeys = ref<string[]>([String(route.name)])
 
-listenerRouteChange((val) => {
+RouterEmitter.on('ROUTE:CHANGE', (val: any) => {
   selectedKeys.value = [val.name as string]
   if (!openKeys.value.includes(val.matched[1]?.name as string)) {
     openKeys.value.push(val.matched[1]?.name as string)
   }
 })
+
 
 const methods = {
   handleClick: (e: string) => {
@@ -54,6 +48,7 @@ const methods = {
 .admin-side-wrap {
   .arco-menu-inline-content {
     position: relative;
+
     &::before {
       position: absolute;
       content: '';
@@ -66,6 +61,7 @@ const methods = {
 
     .arco-menu-indent {
       position: relative;
+
       &::before {
         position: absolute;
         content: '';
@@ -88,6 +84,7 @@ const methods = {
     &.arco-menu-selected {
       color: #fff;
       background-color: rgba($theme-color, 0.85) !important;
+
       .iconfont {
         color: #fff;
       }
@@ -124,6 +121,7 @@ const methods = {
     .arco-menu-item-inner {
       padding: 0;
       border-radius: 5px;
+
       @include useTheme {
         background-color: rgba(getVal(keyColor), 0.03);
       }
@@ -133,6 +131,7 @@ const methods = {
       .arco-menu-item-inner {
         color: #fff;
         background-color: rgba($theme-color, 0.85) !important;
+
         .iconfont {
           color: #fff;
         }
@@ -142,10 +141,12 @@ const methods = {
 
   .side-logo-wrap {
     border-bottom: 1px solid var(--color-border);
+
     img {
       height: 32px;
     }
   }
+
   .arco-menu-inline-header {
     display: flex;
     height: 35px;

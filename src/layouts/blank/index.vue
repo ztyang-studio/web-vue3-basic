@@ -1,5 +1,5 @@
 <template>
-  <div class="login-layout-main flex-center">
+  <div class="blank-layout-main flex-center">
     <router-view v-slot="{ Component, route }">
       <transition name="fade" mode="out-in">
         <KeepAlive v-if="!route.meta.noKeepAlive">
@@ -8,18 +8,18 @@
         <component v-else :is="Component" :key="route.path"></component>
       </transition>
     </router-view>
+    <theme-btn v-show="false" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
 
-const route = useRoute()
 </script>
 
 <style lang="scss" scoped>
-.login-layout-main {
+.blank-layout-main {
   height: 100vh;
+
   @include useTheme {
     background-color: getVal(bgColor);
   }

@@ -27,10 +27,8 @@ export default function setupUserLoginInfoGuard(router: Router) {
     const userStore = useUserStore()
 
     if (userStore.hasLogin) {
-      if (to.name === 'login' || to.name === 'Login') {
-        next({ name: 'Home' })
-      }
-      next()
+      if (to.name === 'login' || to.name === 'Login') next({ name: 'Admin' })
+      else next()
     } else {
       if (to.name === 'login' || to.name === 'Login') next()
       else jumpLogin(to, from, next)

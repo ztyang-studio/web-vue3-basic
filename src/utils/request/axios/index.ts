@@ -4,7 +4,7 @@ import { reqInterceptors } from './request-interceptors'
 import { resInterceptors } from './response-interceptors'
 import type { AxiosInstance, Method, AxiosProgressEvent } from 'axios'
 
-class axiosRequest {
+export class AxiosRequest {
   private http: AxiosInstance
 
   constructor() {
@@ -44,7 +44,10 @@ class axiosRequest {
     })
   }
 
-  public get<T>(
+  /**
+   * get请求
+   */
+  get<T = any>(
     url: string,
     data?: any,
     auth?: boolean,
@@ -52,22 +55,22 @@ class axiosRequest {
   ) {
     return this.request<T>(url, 'get', data, auth, handleDownload)
   }
-  public post<T>(url: string, data?: any, auth?: boolean, headers?: any) {
+  post<T = any>(url: string, data?: any, auth?: boolean, headers?: any) {
     return this.request<T>(url, 'post', data, auth, headers)
   }
-  public delete<T>(url: string, data?: any, auth?: boolean) {
+  delete<T = any>(url: string, data?: any, auth?: boolean) {
     return this.request<T>(url, 'delete', data, auth)
   }
-  public put<T>(url: string, data?: any, auth?: boolean) {
+  put<T = any>(url: string, data?: any, auth?: boolean) {
     return this.request<T>(url, 'put', data, auth)
   }
-  public head<T>(url: string, data?: any, auth?: boolean) {
+  head<T = any>(url: string, data?: any, auth?: boolean) {
     return this.request<T>(url, 'head', data, auth)
   }
-  public patch<T>(url: string, data?: any, auth?: boolean) {
+  patch<T = any>(url: string, data?: any, auth?: boolean) {
     return this.request<T>(url, 'patch', data, auth)
   }
-  public upload<T>(
+  upload<T = any>(
     url: string,
     data?: any,
     auth?: boolean,
@@ -84,4 +87,4 @@ class axiosRequest {
   }
 }
 
-export const request = new (Helper.comm.singleton(axiosRequest))()
+// export const request = new (Helper.comm.singleton(axiosRequest))()

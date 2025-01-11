@@ -1,12 +1,5 @@
 <template>
-  <a-form
-    class="init-db-step"
-    ref="formRef"
-    :model="formModel"
-    :rules="rules"
-    layout="vertical"
-    autocomplete="off"
-  >
+  <a-form class="init-db-step" ref="formRef" :model="formModel" :rules="rules" layout="vertical" autocomplete="off">
     <a-space direction="vertical">
       <a-form-item field="host" hide-label validate-trigger="blur">
         <template #extra> 数据库地址 </template>
@@ -27,12 +20,7 @@
       </a-form-item>
       <a-form-item field="password" hide-label validate-trigger="blur">
         <template #extra> 数据库密码 </template>
-        <a-input-password
-          autocomplete="false"
-          v-model="formModel.password"
-          placeholder="请输入密码"
-          allow-clear
-        >
+        <a-input-password autocomplete="false" v-model="formModel.password" placeholder="请输入密码" allow-clear>
         </a-input-password>
       </a-form-item>
 
@@ -92,13 +80,11 @@ const methods = {
   handleSubmit: async () => {
     const valid = await formRef.value?.validate()
     if (!valid) {
-      await useInstallApi.remove()
-      const { code } = await useInstallApi.connect(formModel)
-      if (code !== 200) return
-
-      const res = await useInstallApi.init()
-      ResMsg(res.code, res.msg)
-      if (res.code === 200) emits('next')
+      const { code, msg } = await useInstallApi.connect(formModel)
+      if (code == 200) {
+        ResMsg(code, msg)
+        emits('next')
+      }
     }
   }
 }

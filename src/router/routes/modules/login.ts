@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import LoginLayout from '@/layouts/login/index.vue'
+import LoginLayout from '@/layouts/blank/index.vue'
 
 const BASE_ROUTES: RouteRecordRaw[] = [
   {

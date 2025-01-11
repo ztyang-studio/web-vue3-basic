@@ -8,6 +8,7 @@ import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router
 NProgress.configure({ showSpinner: false })
 
 const routes: Readonly<RouteRecordRaw[]> = [...appRoutes]
+
 const router = createRouter({
   routes,
   history:

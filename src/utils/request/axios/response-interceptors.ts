@@ -1,28 +1,36 @@
 import type { AxiosInstance } from 'axios'
-import { setAuthEmitter } from '@/utils/emitter/auth'
-
-let msgNum = 0
-const whiteCode = [200, 204]
+import { ApiEmitter } from '@/emitter/api'
 
 export const resInterceptors = (axiosInstance: AxiosInstance) => {
   axiosInstance.interceptors.response.use(
     (response) => {
-      setAuthEmitter(response.data.code)
-      msgNum += 1
-      if (!whiteCode.includes(response.data.code)) {
-        BaseMsg.error(response?.data?.msg || '请求错误')
-        if (msgNum >= 2) {
-          msgNum = 0
-          setTimeout(() => {
-            BaseMsg.clear()
-          }, 500)
-        }
+      const { msg = '未知错误!' } = response.data
+      switch (response.data.code) {
+        case 400:
+          ApiEmitter.emit('API:BAD-REQUEST', msg) // 错误请求
+        case 401:
+          ApiEmitter.emit('API:LOGIN-EXPIRED') // 登录过期
+          break
+        case 402:
+          ApiEmitter.emit('API:NOT-LOGIN') // 未登录
+          break
+        case 403:
+          ApiEmitter.emit('API:UNAUTHORIZED') // 未授权
+        case 404:
+          ApiEmitter.emit('API:NOT-FOUND', msg) // 未找到
+          break
+        case 412:
+          ApiEmitter.emit('API:NOT-INSTALL') // 未安装
+          break
+        case 500:
+          ApiEmitter.emit('API:INTERNAL-SERVER-ERROR') // 服务器错误
+          break
       }
       return response.data
     },
     (error) => {
       // 响应错误
-      BaseMsg.error(error.response?.data?.msg || error.message)
+      ApiEmitter.emit('API:RESPONSE-ERROR', error.response?.data?.msg || error.message)
       return {
         code: -1,
         msg: error.response?.data?.msg || error.message

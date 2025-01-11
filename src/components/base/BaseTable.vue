@@ -160,7 +160,7 @@ const pagination = defineModel<Global.Pagination>('pagination', {
   }
 })
 
-const params = defineModel<Partial<Type.QueryParams>>('params', {
+const params = defineModel<any>('params', {
   default: {}
 })
 

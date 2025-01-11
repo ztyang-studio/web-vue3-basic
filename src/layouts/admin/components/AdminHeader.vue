@@ -2,11 +2,7 @@
   <div class="admin-header-wrap h-100">
     <div class="header-wrap flex-yc flex-sb h-100 px-15">
       <div class="flex-yc g-20">
-        <div
-          class="text-color pointer fw-600 hide-xs"
-          style="margin-top: 2px"
-          @click="appStore.toggleDevice()"
-        >
+        <div class="text-color pointer fw-600 hide-xs" style="margin-top: 2px" @click="appStore.toggleDevice()">
           <IconFont name="indent-decrease" size="18" />
         </div>
         <a-breadcrumb>
@@ -18,10 +14,7 @@
       </div>
       <div class="flex-yc g-15">
         <ThemeBtn />
-        <div
-          class="header-btn flex-center br-50 pointer text-color theme-hover mr-10"
-          @click="toggleFullScreen()"
-        >
+        <div class="header-btn flex-center br-50 pointer text-color theme-hover mr-10" @click="toggleFullScreen()">
           <IconFont v-if="!isFullscreen" name="fullscreen-fill" />
           <IconFont v-else name="fullscreen-exit-fill" />
         </div>
@@ -48,6 +41,7 @@ const breadcrumbList = computed(() => {
   .header-btn {
     height: 28px;
     width: 28px;
+
     @include useTheme {
       background-color: rgba(getVal(mutedColor), 0.1);
     }
@@ -55,6 +49,7 @@ const breadcrumbList = computed(() => {
 
   .header-wrap {
     height: 60px;
+
     @include useTheme {
       border-bottom: 1px solid rgba(getVal(keyColor), 0.05);
     }

@@ -2,7 +2,7 @@
 import { useEventEmitter } from '@/hooks/events'
 
 const systemStore = useSystemStore()
-systemStore.init()
+// systemStore.init()
 
 useEventEmitter()
 </script>

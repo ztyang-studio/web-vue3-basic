@@ -13,7 +13,7 @@ export default function createRouteGuard(router: Router) {
   setupPageGuard(router)
 
   // 站点配置守卫
-  setupSiteConfigGuard(router)
+  // setupSiteConfigGuard(router)
 
   // 安装守卫
   setupInstallGuard(router)

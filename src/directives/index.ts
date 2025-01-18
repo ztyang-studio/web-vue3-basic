@@ -1,15 +1,15 @@
 import type { App } from 'vue'
 
-import ripple from '@/directives/modules/ripple'
-import slideIn from '@/directives/modules/slide-in'
-
-const directivesList: any = { ripple, slideIn }
+const modules = import.meta.glob('./modules/**/*.ts', { eager: true })
 
 const directives = {
   install: function (app: App<Element>) {
-    Object.keys(directivesList).forEach((key) => {
-      app.directive(key, directivesList[key])
-    })
+    for (const path in modules) {
+      const module = (modules[path] as any).default
+      if (!module) continue
+      const directiveName = path.split('/')[2]
+      app.directive(directiveName, module)
+    }
   }
 }
 

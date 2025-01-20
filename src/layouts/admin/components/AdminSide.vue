@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-side-wrap no-select">
+  <div class="admin-side-wrap no-select flex-column h-100">
     <div class="side-logo-wrap py-10 flex-center">
       <div class="flex-yc g-5">
         <img :src="systemStore.logo" />
@@ -9,9 +9,16 @@
       </div>
     </div>
 
-    <a-menu class="mt-5" :collapsed="appStore.isMobile" :popup-max-height="false" auto-scroll-into-view
-      v-model:open-keys="openKeys" v-model:selected-keys="selectedKeys" auto-open-selected
-      @menu-item-click="methods.handleClick">
+    <a-menu
+      class="mt-5 flex-1 h-0"
+      :collapsed="appStore.isMobile"
+      :popup-max-height="false"
+      auto-scroll-into-view
+      v-model:open-keys="openKeys"
+      v-model:selected-keys="selectedKeys"
+      auto-open-selected
+      @menu-item-click="methods.handleClick"
+    >
       <RouteItem :route-list="routeList" />
     </a-menu>
   </div>
@@ -19,7 +26,7 @@
 
 <script setup lang="ts">
 import ADMIN_ROUTES from '@/router/routes/modules/app'
-import { RouterEmitter } from '@/emitter/router';
+import { RouterEmitter } from '@/emitter/router'
 
 const route = useRoute()
 const router = useRouter()
@@ -35,7 +42,6 @@ RouterEmitter.on('ROUTE:CHANGE', (val: any) => {
     openKeys.value.push(val.matched[1]?.name as string)
   }
 })
-
 
 const methods = {
   handleClick: (e: string) => {

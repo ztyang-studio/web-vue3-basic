@@ -1,5 +1,5 @@
 import type { Router } from 'vue-router'
-import { RouterEmitter } from '@/emitter'
+import { RouterEmitter } from '@/utils/emitter'
 
 const title = import.meta.env.APP_TITLE
 export default async function setupPageGuard(router: Router) {

@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import ADMIN_ROUTES from '@/router/routes/modules/app'
-import { RouterEmitter } from '@/emitter/router'
+import { RouterEmitter } from '@/utils/emitter/router'
 
 const route = useRoute()
 const router = useRouter()

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { jwtDecode } from 'jwt-decode'
-import { UserEmitter } from '@/emitter'
+import { UserEmitter } from '@/utils/emitter'
 import type { UserType } from '@/typings/user'
 // import dayjs from 'dayjs'
 

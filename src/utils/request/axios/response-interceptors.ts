@@ -1,5 +1,5 @@
 import type { AxiosInstance } from 'axios'
-import { ApiEmitter } from '@/emitter/api'
+import { ApiEmitter } from '@/utils/emitter/api'
 
 export const resInterceptors = (axiosInstance: AxiosInstance) => {
   axiosInstance.interceptors.response.use(

@@ -1,6 +1,11 @@
 <template>
-  <a-tabs class="header-tabs-wrap" editable :active-key="activeKey" @tab-click="methods.clickTab"
-    @delete="methods.removeTab">
+  <a-tabs
+    class="header-tabs-wrap"
+    editable
+    :active-key="activeKey"
+    @tab-click="methods.clickTab"
+    @delete="methods.removeTab"
+  >
     <a-tab-pane v-for="(item, index) in tabRoute" :closable="!item.meta.fixed" :key="index">
       <template #title>
         <div class="flex-yc g-5">
@@ -15,7 +20,7 @@
 <script setup lang="ts">
 import ADMIN_ROUTES from '@/router/routes/modules/app'
 import type { RouteRecordNameGeneric } from 'vue-router'
-import { RouterEmitter } from '@/emitter';
+import { RouterEmitter } from '@/utils/emitter'
 
 interface TabRoute {
   name?: RouteRecordNameGeneric
@@ -35,8 +40,8 @@ const activeKey = computed(() => {
 
 const methods = {
   initTabs: () => {
-    curentRoute.value = route.name;
-    [...routeList].reverse().forEach((route) => {
+    curentRoute.value = route.name
+    ;[...routeList].reverse().forEach((route) => {
       if (route.meta?.fixed) {
         tabRoute.value.unshift({
           name: route.name,
@@ -72,14 +77,11 @@ RouterEmitter.on('ROUTE:CHANGE', (val: any) => {
   curentRoute.value = val.name
 })
 
-
-
 methods.initTabs()
 </script>
 
 <style lang="scss">
 .header-tabs-wrap {
-
   .arco-tabs-tab {
     height: 35px;
     margin: 0 15px;

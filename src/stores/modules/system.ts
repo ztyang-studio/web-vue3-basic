@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { SystemEmitter } from '@/emitter'
+import { SystemEmitter } from '@/utils/emitter'
 import type { ConfigType } from '@/typings/config'
 
 export const useSystemStore = defineStore('systemStore', {

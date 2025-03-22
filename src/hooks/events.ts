@@ -1,5 +1,5 @@
 import { useRouter } from 'vue-router'
-import { SystemEmitter, ApiEmitter, RouterEmitter } from '@/emitter'
+import { SystemEmitter, ApiEmitter, RouterEmitter } from '@/utils/emitter'
 
 export const useEventEmitter = () => {
   const router = useRouter()

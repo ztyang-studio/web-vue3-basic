@@ -1,5 +1,5 @@
 import type { Router, RouteRecordNormalized } from 'vue-router'
-import { ApiEmitter } from '@/emitter'
+import { ApiEmitter } from '@/utils/emitter'
 
 const isInstall = ref(true)
 

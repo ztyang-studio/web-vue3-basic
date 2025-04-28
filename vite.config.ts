@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import { defineConfig, loadEnv } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import glsl from 'vite-plugin-glsl'
 import { vitePluginForArco } from '@arco-plugins/vite-vue'
 
 // https://vitejs.dev/config/
@@ -16,6 +17,7 @@ export default defineConfig(({ mode }) => {
     envPrefix: 'APP',
     plugins: [
       vue(),
+      glsl(),
       AutoImport({
         imports: ['vue', 'vue-router', 'pinia', '@vueuse/core'],
         dts: 'unplugin/auto-imports.d.ts',

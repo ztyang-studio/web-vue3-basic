@@ -1,0 +1,33 @@
+@font-face {
+  font-family: douyu;
+  src:
+    url(/static/fonts/douyu.woff) format('woff'),
+    url(/static/fonts/douyu.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: youshe;
+  src:
+    url(/static/fonts/youshe.ttf) format('truetype');
+}
+
+
+@font-face {
+  font-family: iconfont;
+  src: url(/static/fonts/iconfont.eot);
+  src:
+    url(/static/fonts/iconfont.eot#iefix) format('embedded-opentype'),
+    url(/static/fonts/iconfont.woff2) format('woff2'),
+    url(/static/fonts/iconfont.woff) format('woff'),
+    url(/static/fonts/iconfont.ttf) format('truetype');
+  font-display: swap;
+}
+
+
+.douyu {
+  font-family: douyu;
+}
+
+.youshe {
+  font-family: youshe;
+}

@@ -33,4 +33,9 @@ export const useEventEmitter = () => {
   RouterEmitter.on('ROUTE:CHANGE', () => {
     userStore.init()
   })
+
+  onBeforeUnmount(() => {
+    ApiEmitter.clear()
+    RouterEmitter.clear()
+  })
 }

@@ -17,4 +17,14 @@ export default class BaseEmitter<T extends string> {
       listener(...args)
     }
   }
+
+  off(eventName: T) {
+    this._listeners[eventName].clear()
+  }
+
+  clear() {
+    for (const eventName of Object.keys(this._listeners)) {
+      this.off(eventName as T)
+    }
+  }
 }
